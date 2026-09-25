@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOHAMED Global Digital Library & Store</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #0284c7;
+            --accent-cyan: #38bdf8;
+            --border-color: #334155;
+            --whatsapp-green: #25d366;
+            --fav-red: #ef4444;
+
+            /* GOLDEN THEME STYLES */
+            --gold-primary: #ffd700;
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --gold-glow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- TOP CONTACT BAR --- */
+        .top-contact-bar {
+            background: linear-gradient(90deg, #1e293b, #0f172a);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 8px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #fcf6ba;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item i {
+            color: var(--gold-primary);
+        }
+
+        .contact-item span.hours {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 4px;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        /* --- GOLDEN LOGO EMBLEM --- */
+        .golden-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .golden-badge {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--gold-glow);
+            padding: 4px;
+            animation: pulseGold 2.5s infinite alternate;
+        }
+
+        .golden-badge-inner {
+            width: 100%;
+            height: 100%;
+            background-color: #0f172a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d4af37;
+        }
+
+        .golden-badge-inner i {
+            font-size: 2.5rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        /* --- 20-SECOND WELCOME OVERLAY --- */
+        #intro-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .welcome-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 25px; border-radius: 20px; max-width: 480px; width: 100%;
+            box-shadow: var(--gold-glow); animation: fadeInUp 0.8s ease;
+        }
+
+        .welcome-title { font-size: 1.6rem; margin: 10px 0; }
+        .welcome-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+
+        .developer-badge {
+            background: rgba(212, 175, 55, 0.1); border: 1px dashed #d4af37;
+            padding: 10px; border-radius: 10px; margin-bottom: 20px; font-size: 0.85rem; color: #fcf6ba;
+        }
+
+        .progress-container {
+            width: 100%; background: rgba(255, 255, 255, 0.1); height: 6px;
+            border-radius: 10px; overflow: hidden; margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            width: 0%; height: 100%; background: var(--gold-gradient);
+            animation: load20s 20s linear forwards;
+        }
+
+        @keyframes load20s { 0% { width: 0%; } 100% { width: 100%; } }
+        .timer-text { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 18px; }
+
+        .btn-enter {
+            padding: 10px 28px; background: var(--gold-gradient); color: #0f172a;
+            border: none; border-radius: 25px; font-size: 0.95rem; font-weight: bold;
+            cursor: pointer; box-shadow: var(--gold-glow); transition: transform 0.2s ease;
+        }
+
+        .btn-enter:hover { transform: scale(1.05); }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGold { from { box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); } to { box-shadow: 0 0 30px rgba(252, 246, 186, 0.9); } }
+
+        .fade-out { opacity: 0 !important; visibility: hidden !important; }
+
+        /* --- HEADER SECTION --- */
+        header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 2px solid #d4af37;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .header-logo-small {
+            width: 55px; height: 55px; border-radius: 50%;
+            background: var(--gold-gradient); padding: 2px; margin-bottom: 8px;
+        }
+
+        .header-logo-small-inner {
+            width: 100%; height: 100%; background: #0f172a;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+
+        .header-logo-small-inner i {
+            font-size: 1.5rem; background: var(--gold-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        header h1 { font-size: 1.4rem; letter-spacing: 1px; }
+        header p { color: var(--text-muted); font-size: 0.8rem; margin-top: 3px; }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .cart-trigger-btn, .upload-trigger-btn {
+            background: var(--gold-gradient); color: #0f172a;
+            border: none; padding: 9px 16px; border-radius: 20px;
+            font-weight: bold; font-size: 0.85rem; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; box-shadow: var(--gold-glow);
+            flex: 1; max-width: 180px; justify-content: center;
+        }
+
+        .upload-trigger-btn {
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            color: #ffffff; box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        .cart-count {
+            background: #ef4444; color: white; border-radius: 50%;
+            width: 20px; height: 20px; display: flex; align-items: center;
+            justify-content: center; font-size: 0.75rem;
+        }
+
+        /* --- ROTATING AI ADVERTISEMENTS SLIDER --- */
+        .ad-banner-section { width: 100%; padding: 12px 15px 0 15px; }
+
+        .ad-carousel {
+            position: relative; width: 100%; max-width: 1100px; margin: 0 auto;
+            border-radius: 16px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .ad-slides-container { display: flex; width: 300%; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .ad-slide { width: 33.333%; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; }
+
+        .slide-chatgpt { background: linear-gradient(135deg, #10a37f 0%, #064e3b 100%); color: #ffffff; }
+        .slide-gemini { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #9333ea 100%); color: #ffffff; }
+        .slide-claude { background: linear-gradient(135deg, #7c2d12 0%, #d97706 100%); color: #ffffff; }
+
+        .ad-badge {
+            position: absolute; top: 8px; right: 12px; background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.2); padding: 2px 8px; border-radius: 12px;
+            font-size: 0.65rem; font-weight: bold; text-transform: uppercase;
+        }
+
+        .ad-content { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .ad-icon-box {
+            width: 45px; height: 45px; border-radius: 12px; background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;
+        }
+
+        .ad-text-box h4 { font-size: 1rem; font-weight: 800; margin-bottom: 3px; }
+        .ad-text-box p { font-size: 0.75rem; opacity: 0.9; line-height: 1.3; }
+
+        .ad-btn {
+            background: #ffffff; color: #000000; padding: 6px 12px; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 700; text-decoration: none; white-space: nowrap; transition: all 0.3s ease;
+        }
+
+        .ad-dots { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s ease; }
+        .dot.active { background: #ffffff; width: 20px; border-radius: 10px; }
+
+        /* --- CONTROLS SECTION --- */
+        .controls-section {
+            padding: 15px; background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color); position: sticky;
+            top: 0; z-index: 10; margin-top: 15px;
+        }
+
+        .search-box { position: relative; margin-bottom: 12px; }
+        .search-box input {
+            width: 100%; padding: 12px 15px 12px 40px; background-color: var(--bg-primary);
+            border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.9rem; outline: none;
+        }
+
+        .search-box i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .filter-chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
+
+        .chip {
+            background-color: var(--bg-primary); color: var(--text-muted); border: 1px solid var(--border-color);
+            padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; white-space: nowrap; cursor: pointer; transition: all 0.3s ease;
+        }
+
+        .chip.active { background: var(--gold-gradient); color: #0f172a; font-weight: bold; border-color: #d4af37; }
+
+        main { padding: 20px 15px; flex: 1; }
+
+        .section-title { font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+
+        .book-card {
+            background-color: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 16px; display: flex; flex-direction: column;
+            justify-content: space-between; transition: transform 0.2s ease; position: relative;
+        }
+
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .badge { font-size: 0.65rem; font-weight: bold; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+        .badge-pdf { background-color: #0284c7; color: #fff; }
+        .badge-store { background-color: #eab308; color: #0f172a; }
+        .badge-premium { background: var(--gold-gradient); color: #0f172a; }
+        .badge-user { background-color: #a855f7; color: #fff; }
+
+        .fav-btn { background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; }
+        .fav-btn.active { color: var(--fav-red); }
+
+        .book-title { color: var(--text-main); font-size: 1.05rem; margin-bottom: 6px; }
+        .book-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.4; margin-bottom: 15px; }
+
+        .store-price-tag {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 12px; background: rgba(255, 255, 255, 0.03); padding: 8px; border-radius: 8px;
+        }
+
+        .price-current { font-size: 1.2rem; font-weight: 800; color: #22c55e; }
+        .price-old { font-size: 0.85rem; text-decoration: line-through; color: var(--text-muted); margin-left: 6px; }
+
+        .btn-buy-store {
+            background: var(--gold-gradient); color: #0f172a; border: none;
+            padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.85rem;
+            cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
+        }
+
+        .btn-preview {
+            background: linear-gradient(135deg, #eab308, #ca8a04); color: #0f172a; border: none;
+            padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.85rem;
+            cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;
+        }
+
+        .btn-read {
+            background-color: var(--accent-cyan); color: #0f172a; border: none;
+            padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.85rem;
+            cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
+        }
+
+        /* GUARANTEE BADGE */
+        .guarantee-box {
+            background: rgba(34, 197, 94, 0.1); border: 1px dashed #22c55e;
+            padding: 8px; border-radius: 8px; font-size: 0.75rem; color: #4ade80;
+            margin-bottom: 10px; text-align: center;
+        }
+
+        /* --- PREVIEW SLIDER MODAL --- */
+        .preview-slide { display: none; text-align: center; padding: 10px; }
+        .preview-slide.active { display: block; }
+        .preview-page-content {
+            background: #0f172a; border: 1px solid var(--border-color);
+            border-radius: 10px; padding: 20px; min-height: 220px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: #cbd5e1; font-size: 0.9rem; line-height: 1.6;
+        }
+
+        .preview-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .preview-btn {
+            background: var(--bg-primary); border: 1px solid var(--border-color); color: #fff;
+            padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;
+        }
+        .preview-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* --- USER UPLOAD MODAL STYLES --- */
+        .upload-limit-badge {
+            background: rgba(56, 189, 248, 0.1); color: var(--accent-cyan);
+            padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 12px;
+        }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px; background-color: var(--bg-primary);
+            border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.85rem; outline: none;
+        }
+
+        .btn-submit-upload {
+            background: linear-gradient(135deg, #38bdf8, #0284c7); color: #fff;
+            border: none; padding: 12px; border-radius: 8px; font-weight: bold;
+            width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+
+        .comment-section { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-top: 30px; }
+        .comment-section h3 { color: var(--accent-cyan); font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+
+        .comment-form { display: flex; flex-direction: column; gap: 10px; }
+        .comment-form input, .comment-form textarea {
+            width: 100%; padding: 10px 12px; background-color: var(--bg-primary);
+            border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.85rem; outline: none;
+        }
+
+        .btn-send-comment {
+            background-color: var(--accent-blue); color: #fff; border: none; padding: 10px;
+            border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+
+        .whatsapp-float {
+            position: fixed; bottom: 20px; right: 20px; background-color: var(--whatsapp-green);
+            color: #fff; border-radius: 50px; padding: 12px 18px; font-size: 0.9rem; font-weight: bold;
+            display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); text-decoration: none; z-index: 99;
+        }
+
+        .modal {
+            display: none; position: fixed; z-index: 100; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--bg-card); margin: 8% auto; padding: 20px;
+            border: 1px solid var(--accent-blue); border-radius: 12px; width: 90%; max-width: 500px; max-height: 85vh; overflow-y: auto;
+        }
+
+        .close-btn { color: #fff; float: right; font-size: 24px; font-weight: bold; cursor: pointer; }
+
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+        .cart-total { display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: bold; margin-top: 15px; color: #22c55e; }
+
+        .btn-checkout {
+            background-color: var(--whatsapp-green); color: white; border: none;
+            padding: 12px; border-radius: 8px; font-weight: bold; width: 100%; margin-top: 15px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.95rem; text-decoration: none;
+        }
+
+        footer { text-align: center; padding: 15px; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border-color); background-color: var(--bg-card); }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CONTACT BAR -->
+    <div class="top-contact-bar">
+        <a href="tel:0639186244" class="contact-item">
+            <i class="fa-solid fa-phone"></i> LANBARKA SHAQADA: <strong>0639186244</strong>
+        </a>
+        <a href="tel:0654813707" class="contact-item">
+            <i class="fa-solid fa-headset"></i> LANBARKA CAAWIMADA: <strong>0654813707</strong>
+            <span class="hours">FURAN 12H</span>
+        </a>
+    </div>
+
+    <!-- 20-SECOND WELCOME OVERLAY -->
+    <div id="intro-screen">
+        <div class="welcome-card">
+            <div class="golden-logo-container">
+                <div class="golden-badge">
+                    <div class="golden-badge-inner">
+                        <i class="fa-solid fa-book-journal-whills"></i>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="welcome-title gold-text">Soo Dhowaw MOHAMED Library</h1>
+            <p class="welcome-desc">
+                Ku soo dhawaaw maktabadda dhijitaalka ah iyo dukaanka buugaagta caafimaadka! Halkan ka hel buugaag bilaash ah, kuwo lacag ah, ama adigu soo dhig buuggaaga!
+            </p>
+
+            <div class="developer-badge">
+                <i class="fa-solid fa-code"></i> <b>Developer:</b> Waxaa dhisay & Designed sameeyay <b>Dr. Mohamed Nour (DrMohaan)</b>
+            </div>
+
+            <div class="progress-container"><div class="progress-bar"></div></div>
+            <div class="timer-text">Waxaad toos u gudbi doontaa <span id="countdown">20</span> ilbiriqsi ka dib...</div>
+
+            <button class="btn-enter" onclick="closeIntro()">Sii gudub / Gudaha U Gal <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-top">
+            <div class="header-logo-small">
+                <div class="header-logo-small-inner">
+                    <i class="fa-solid fa-book-journal-whills"></i>
+                </div>
+            </div>
+            <h1 class="gold-text">MOHAMED LIBRARY & STORE</h1>
+            <p>Saldhigga Dhijitaalka ah ee Buugaagta & Dukaanka Caafimaadka</p>
+        </div>
+
+        <div class="header-actions">
+            <button class="upload-trigger-btn" onclick="openUploadModal()">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Soo Dhig Buug
+            </button>
+            <button class="cart-trigger-btn" onclick="openCartModal()">
+                <i class="fa-solid fa-cart-shopping"></i> Karto
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ROTATING AI ADVERTISEMENTS SECTION -->
+    <div class="ad-banner-section">
+        <div class="ad-carousel">
+            <div class="ad-slides-container" id="adContainer">
+                <div class="ad-slide slide-chatgpt">
+                    <span class="ad-badge">Xayaysiis / Sponsored</span>
+                    <div class="ad-content">
+                        <div class="ad-icon-box"><i class="fa-solid fa-robot"></i></div>
+                        <div class="ad-text-box">
+                            <h4>ChatGPT 4o <i class="fa-solid fa-bolt" style="color: #fde047;"></i></h4>
+                            <p>U adeegso caawiyaha AI-ga ee OpenAI cilmi-baadhista caafimaadka.</p>
+                        </div>
+                    </div>
+                    <a href="https://chatgpt.com" target="_blank" class="ad-btn" style="color: #064e3b;">Explore ➔</a>
+                </div>
+
+                <div class="ad-slide slide-gemini">
+                    <span class="ad-badge">Xayaysiis / Sponsored</span>
+                    <div class="ad-content">
+                        <div class="ad-icon-box"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="ad-text-box">
+                            <h4>Google Gemini 1.5 <i class="fa-solid fa-star" style="color: #fcd34d;"></i></h4>
+                            <p>AI-ga Google ee baara buugaagta waawayn ee PDF-ka.</p>
+                        </div>
+                    </div>
+                    <a href="https://gemini.google.com" target="_blank" class="ad-btn" style="color: #1e3a8a;">Explore ➔</a>
+                </div>
+
+                <div class="ad-slide slide-claude">
+                    <span class="ad-badge">Xayaysiis / Sponsored</span>
+                    <div class="ad-content">
+                        <div class="ad-icon-box"><i class="fa-solid fa-brain"></i></div>
+                        <div class="ad-text-box">
+                            <h4>Claude 3.5 Sonnet <i class="fa-solid fa-feather" style="color: #fed7aa;"></i></h4>
+                            <p>Habka ugu saxsan falanqaynta qoraallada adag.</p>
+                        </div>
+                    </div>
+                    <a href="https://claude.ai" target="_blank" class="ad-btn" style="color: #7c2d12;">Explore ➔</a>
+                </div>
+            </div>
+            <div class="ad-dots">
+                <span class="dot active" onclick="goToAdSlide(0)"></span>
+                <span class="dot" onclick="goToAdSlide(1)"></span>
+                <span class="dot" onclick="goToAdSlide(2)"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROLS SECTION -->
+    <div class="controls-section">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Raadi buug ama dukaanka..." onkeyup="filterBooks()">
+        </div>
+
+        <div class="filter-chips">
+            <button class="chip active" onclick="filterCategory('all', this)">Dhammaan</button>
+            <button class="chip" onclick="filterCategory('premium', this)"><i class="fa-solid fa-lock" style="color: #ffd700;"></i> Premium (Lacag)</button>
+            <button class="chip" onclick="filterCategory('user', this)"><i class="fa-solid fa-users" style="color: #a855f7;"></i> Dadweynaha</button>
+            <button class="chip" onclick="filterCategory('store', this)"><i class="fa-solid fa-store" style="color: #eab308;"></i> Dukaanka (Iib)</button>
+            <button class="chip" onclick="filterCategory('fav', this)"><i class="fa-solid fa-heart" style="color: #ef4444;"></i> Favorites</button>
+            <button class="chip" onclick="filterCategory('lab', this)">Shaybaadhka</button>
+        </div>
+    </div>
+
+    <main>
+        <div class="section-title">
+            <i class="fa-solid fa-layer-group"></i> <span id="categoryTitle">Dhammaan Buugaagta & Dukaanka</span>
+        </div>
+
+        <div class="books-grid" id="booksGrid">
+
+            <!-- PREMIUM BOOK ITEM (WITH 4-SLIDE PREVIEW & DIRECT PHONE CALL/WHATSAPP) -->
+            <div class="book-card" data-category="premium" data-fav="false">
+                <div>
+                    <div class="card-header">
+                        <span class="badge badge-premium"><i class="fa-solid fa-crown"></i> PREMIUM (LACAG)</span>
+                        <button class="fav-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <h3 class="book-title">Cilmiga Dawaynta & Pharmacology</h3>
+                    <p class="book-desc">Buugga ugu casrisan ee dawooyinka. Waxaa lagu jiraa 4 bog oo tijaabo ah ka hor inta aadan iabsan.</p>
+
+                    <div class="guarantee-box">
+                        <i class="fa-solid fa-shield-halved"></i> <b>Damaanad Buuxda:</b> Haddii aad u bogi weydo buugga, lacagtaada ayaa laguun celinayaa ama buug kale ayaa laguugu beddelayaa!
+                    </div>
+
+                    <div class="store-price-tag">
+                        <div>
+                            <span class="price-current">$15.00</span>
+                            <span class="price-old">$25.00</span>
+                        </div>
+                        <span style="color: #f59e0b; font-size: 0.8rem;"><i class="fa-solid fa-star"></i> 5.0</span>
+                    </div>
+                </div>
+
+                <button class="btn-preview" onclick="openPreviewModal('Cilmiga Dawaynta & Pharmacology', 15.00)">
+                    <i class="fa-solid fa-eye"></i> Tijaabi (Preview 4 Page)
+                </button>
+                <a href="https://wa.me/252639186244?text=Asc%20MOHAMED%20Library,%20waxaan%20doonayaa%20inaa%20iibsado%20buugga:%20Cilmiga%20Dawaynta%20%26%20Pharmacology%20($15)" target="_blank" class="btn-buy-store">
+                    <i class="fa-brands fa-whatsapp"></i> Si Toos ah U Iabso (0639186244)
+                </a>
+            </div>
+
+            <!-- STORE ITEM 1 -->
+            <div class="book-card" data-category="store" data-fav="false">
+                <div>
+                    <div class="card-header">
+                        <span class="badge badge-store">STORE / IIB</span>
+                        <button class="fav-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <h3 class="book-title">Bugha Dhakhso U Baro Anatomy</h3>
+                    <p class="book-desc">Buug dhammaystiran oo muqaallo ah oo ku baraya anatomy-ga bini'aadanka oo somali ah.</p>
+                    <div class="store-price-tag">
+                        <div>
+                            <span class="price-current">$12.00</span>
+                            <span class="price-old">$20.00</span>
+                        </div>
+                        <span style="color: #f59e0b; font-size: 0.8rem;"><i class="fa-solid fa-star"></i> 4.9</span>
+                    </div>
+                </div>
+                <button class="btn-buy-store" onclick="addToCart('Bugha Dhakhso U Baro Anatomy', 12.00)">
+                    <i class="fa-solid fa-cart-plus"></i> Ku Add-garee Kartada
+                </button>
+            </div>
+
+            <!-- FREE PDF ITEM -->
+            <div class="book-card" data-category="lab" data-fav="false">
+                <div>
+                    <div class="card-header">
+                        <span class="badge badge-pdf">PDF BILAASH</span>
+                        <button class="fav-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <h3 class="book-title">Barashada Shaybaadhka</h3>
+                    <p class="book-desc">Buugga rasmiga ah ee barashada tijaabooyinka iyo farsamada shaybaadhka.</p>
+                </div>
+                <a href="https://drive.google.com/file/d/1AUSMIxB-gys_ignN9lxIfZWUYLfAmGFS/view?usp=drivesdk" target="_blank" class="btn-read">
+                    <i class="fa-solid fa-file-pdf"></i> Akhri Bilaash
+                </a>
+            </div>
+        </div>
+
+        <!-- COMMENT SECTION -->
+        <div class="comment-section">
+            <h3><i class="fa-solid fa-comments"></i> Soo Dir Ra'yigaaga ama Comment</h3>
+            <form class="comment-form" onsubmit="sendComment(event)">
+                <input type="text" id="commentName" placeholder="Magacaaga..." required>
+                <textarea id="commentMessage" placeholder="Soo qrib ra'yigaaga ama buug aad u baahan tahay..." required></textarea>
+                <button type="submit" class="btn-send-comment">
+                    <i class="fa-solid fa-paper-plane"></i> Dir Ra'yiga (WhatsApp)
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/252639186244?text=Asc%20Mohamed%20Library,%20waxaan%20doonayaa%20faahfaahin" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Nala Xidhiidh
+    </a>
+
+    <!-- 4-PAGE PREVIEW MODAL -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePreviewModal()">&times;</span>
+            <h3 id="previewTitle" style="color: #ffd700; margin-bottom: 5px;"><i class="fa-solid fa-book-open"></i> Preview Buugga</h3>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 15px;">Waxaa kuu furan 4-ta bog ee ugu horreeya oo kaliya.</p>
+
+            <div id="slide1" class="preview-slide active">
+                <div class="preview-page-content">
+                    <h4>📖 PAGE 1: Hordhac</h4>
+                    <p style="margin-top: 10px;">Ku soo dhawaaw buugga Cilmiga Dawaynta. Cutubkan wuxuu ku barayaa aasaaska Pharmacokinetics iyo Pharmacodynamics.</p>
+                </div>
+            </div>
+
+            <div id="slide2" class="preview-slide">
+                <div class="preview-page-content">
+                    <h4>📖 PAGE 2: Qaybaha Dawooyinka</h4>
+                    <p style="margin-top: 10px;">Dawooyinku waxay u kala baxaan Antibiotics, Analgesics, iyo Antipyretics. Mid walba wuxuu leeyahay hab lagu doorto...</p>
+                </div>
+            </div>
+
+            <div id="slide3" class="preview-slide">
+                <div class="preview-page-content">
+                    <h4>📖 PAGE 3: Doosada (Dosage Calculation)</h4>
+                    <p style="margin-top: 10px;">Xisaabinta doosada bukaan-socodka waxay ku xidhan tahay Miisaanka (Weight) iyo Da'da (Age)...</p>
+                </div>
+            </div>
+
+            <div id="slide4" class="preview-slide">
+                <div class="preview-page-content" style="border: 1px dashed #ef4444; background: rgba(239, 68, 68, 0.05);">
+                    <h4 style="color: #ef4444;">🔒 PAGE 4: DHAMMAADKA TIJAABADA</h4>
+                    <p style="margin-top: 10px;">Tijaabadii 4-ta bog ee bilaashka ahayd way ku egtahay halkan!</p>
+                    <p style="font-size: 0.8rem; color: #38bdf8; margin-top: 8px;">Si aad u hesho Buugga oo dhammaystiran, fadlan la soo xidhiidh maamulka.</p>
+                </div>
+            </div>
+
+            <div class="preview-nav">
+                <button class="preview-btn" id="prevBtn" onclick="changePreviewSlide(-1)" disabled>⬅ Hore</button>
+                <span style="font-size: 0.8rem; color: var(--text-muted);" id="pageIndicator">Bogga 1 / 4</span>
+                <button class="preview-btn" id="nextBtn" onclick="changePreviewSlide(1)">Danbe ➡</button>
+            </div>
+
+            <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 10px; text-align: center;">
+                <p style="font-size: 0.8rem; color: #ffd700; margin-bottom: 8px;"><b>Si aad buugga u iabsato ama lacagta u bixiso:</b></p>
+                <a href="https://wa.me/252639186244?text=Asc%20Mohamed,%20waxaan%20doonayaa%20inaa%20iibsado%20buugga%20aan%20preview-ga%20ku%20sameeyay" target="_blank" class="btn-buy-store" style="margin-bottom: 8px;">
+                    <i class="fa-brands fa-whatsapp"></i> Soo Wac / WhatsApp Shaqada (0639186244)
+                </a>
+                <a href="tel:0654813707" class="btn-buy-store" style="background: linear-gradient(135deg, #0284c7, #38bdf8); color: #fff;">
+                    <i class="fa-solid fa-headset"></i> Soo Wac Caawimada (0654813707)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER BOOK UPLOAD MODAL -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeUploadModal()">&times;</span>
+            <h2 style="color: #38bdf8; margin-bottom: 10px;"><i class="fa-solid fa-cloud-arrow-up"></i> Soo Dhig Buuggaaga</h2>
+            
+            <div class="upload-limit-badge">
+                <i class="fa-solid fa-clock"></i> Xaddidnaanta Maanta: <strong id="uploadCountText">0</strong> / 200 Buug
+            </div>
+
+            <form id="userUploadForm" onsubmit="handleUserUpload(event)">
+                <div class="form-group">
+                    <label>Magaca Buugga *</label>
+                    <input type="text" id="upBookTitle" placeholder="Tusaale: Barashada Cilmiga Dhiigga" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Magaca Qoraaga / Magacaaga *</label>
+                    <input type="text" id="upAuthorName" placeholder="Tusaale: Dr. Ahmed Mohamed" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Qaybta Buugga (Category) *</label>
+                    <select id="upCategory">
+                        <option value="user">Dadweynaha / User Uploads</option>
+                        <option value="lab">Shaybaadhka (Lab)</option>
+                        <option value="procedure">Procedures</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Link-ga Buugga (Drive / Direct PDF URL) *</label>
+                    <input type="url" id="upBookLink" placeholder="https://drive.google.com/file/d/..." required>
+                </div>
+
+                <div class="form-group">
+                    <label>Sifayn Gaaban (Description)</label>
+                    <textarea id="upBookDesc" placeholder="Faahfaahin kooban oo ku saabsan buugga..."></textarea>
+                </div>
+
+                <button type="submit" id="submitUploadBtn" class="btn-submit-upload">
+                    <i class="fa-solid fa-file-circle-plus"></i> Soo Dhig Buugga Nunka
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SHOPPING CART MODAL -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCartModal()">&times;</span>
+            <h2 style="color: #ffd700; margin-bottom: 15px;"><i class="fa-solid fa-cart-shopping"></i> Kartada Dukaanka</h2>
+            <div id="cartItemsList">
+                <p style="color: var(--text-muted);">Kartadu waa madhan tahay iminka.</p>
+            </div>
+            <div class="cart-total">
+                <span>Wadarta Guud:</span>
+                <span id="cartTotalPrice">$0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="checkoutWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> Dhamaystir Bixinta (0639186244)
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 MOHAMED LIBRARY & STORE. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Intro Countdown Timer Logic
+        let timeLeft = 20;
+        const countdownEl = document.getElementById('countdown');
+
+        const timerInterval = setInterval(() => {
+            timeLeft--;
+            if (countdownEl) countdownEl.innerText = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                closeIntro();
+            }
+        }, 1000);
+
+        function closeIntro() {
+            clearInterval(timerInterval);
+            document.getElementById('intro-screen').classList.add('fade-out');
+        }
+
+        /* --- AD BANNER SLIDER LOGIC --- */
+        let currentAdSlide = 0;
+        const totalAdSlides = 3;
+        const adContainer = document.getElementById('adContainer');
+        const dots = document.querySelectorAll('.ad-dots .dot');
+
+        function goToAdSlide(index) {
+            currentAdSlide = index;
+            adContainer.style.transform = `translateX(-${currentAdSlide * 33.333}%)`;
+            dots.forEach((dot, i) => {
+                if(i === currentAdSlide) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        setInterval(() => {
+            currentAdSlide = (currentAdSlide + 1) % totalAdSlides;
+            goToAdSlide(currentAdSlide);
+        }, 4000);
+
+        /* --- PREVIEW SLIDER LOGIC --- */
+        let activePreviewPage = 1;
+        let activeBookTitle = "";
+        let activeBookPrice = 0;
+
+        function openPreviewModal(title, price) {
+            activeBookTitle = title;
+            activeBookPrice = price;
+            document.getElementById('previewTitle').innerText = title;
+            activePreviewPage = 1;
+            updatePreviewUI();
+            document.getElementById('previewModal').style.display = 'block';
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewModal').style.display = 'none';
+        }
+
+        function changePreviewSlide(direction) {
+            activePreviewPage += direction;
+            if (activePreviewPage < 1) activePreviewPage = 1;
+            if (activePreviewPage > 4) activePreviewPage = 4;
+            updatePreviewUI();
+        }
+
+        function updatePreviewUI() {
+            for (let i = 1; i <= 4; i++) {
+                let slide = document.getElementById(`slide${i}`);
+                if (i === activePreviewPage) slide.classList.add('active');
+                else slide.classList.remove('active');
+            }
+            document.getElementById('pageIndicator').innerText = `Bogga ${activePreviewPage} / 4`;
+            document.getElementById('prevBtn').disabled = (activePreviewPage === 1);
+            document.getElementById('nextBtn').disabled = (activePreviewPage === 4);
+        }
+
+        /* --- USER UPLOAD & 200 DAILY LIMIT SYSTEM --- */
+        const MAX_DAILY_UPLOADS = 200;
+
+        function checkDailyUploadLimit() {
+            const today = new Date().toISOString().split('T')[0];
+            const storedData = JSON.parse(localStorage.getItem('user_upload_tracker')) || { date: today, count: 0 };
+
+            if (storedData.date !== today) {
+                const resetData = { date: today, count: 0 };
+                localStorage.setItem('user_upload_tracker', JSON.stringify(resetData));
+                return resetData;
+            }
+
+            return storedData;
+        }
+
+        function updateUploadUI() {
+            const tracker = checkDailyUploadLimit();
+            document.getElementById('uploadCountText').innerText = tracker.count;
+
+            const submitBtn = document.getElementById('submitUploadBtn');
+            if (tracker.count >= MAX_DAILY_UPLOADS) {
+                submitBtn.disabled = true;
+                submitBtn.style.background = '#64748b';
+                submitBtn.innerText = "Xaddidnaanta Maanta Waa Buuxdaa (200/200)";
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.style.background = 'linear-gradient(135deg, #38bdf8, #0284c7)';
+                submitBtn.innerHTML = `<i class="fa-solid fa-file-circle-plus"></i> Soo Dhig Buugga Nunka`;
+            }
+        }
+
+        function handleUserUpload(event) {
+            event.preventDefault();
+            const tracker = checkDailyUploadLimit();
+
+            if (tracker.count >= MAX_DAILY_UPLOADS) {
+                alert("Waan ka xannahay! Maanta waxaa la soo dhigay 200 oo buug. Fadlan berri ku soo noqogso.");
+                return;
+            }
+
+            const title = document.getElementById('upBookTitle').value;
+            const author = document.getElementById('upAuthorName').value;
+            const category = document.getElementById('upCategory').value;
+            const link = document.getElementById('upBookLink').value;
+            const desc = document.getElementById('upBookDesc').value || "Wuxuu leeyahay: " + author;
+
+            tracker.count += 1;
+            localStorage.setItem('user_upload_tracker', JSON.stringify(tracker));
+
+            const booksGrid = document.getElementById('booksGrid');
+            const newCard = document.createElement('div');
+            newCard.className = 'book-card';
+            newCard.setAttribute('data-category', category);
+            newCard.setAttribute('data-fav', 'false');
+
+            newCard.innerHTML = `
+                <div>
+                    <div class="card-header">
+                        <span class="badge badge-user">USER / DADWEYNAHA</span>
+                        <button class="fav-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                    </div>
+                    <h3 class="book-title">${title}</h3>
+                    <p class="book-desc">${desc} <br><small style="color: var(--accent-cyan)">Qoraaga: ${author}</small></p>
+                </div>
+                <a href="${link}" target="_blank" class="btn-read">
+                    <i class="fa-solid fa-file-pdf"></i> Akhri Buugga
+                </a>
+            `;
+
+            booksGrid.prepend(newCard);
+
+            document.getElementById('userUploadForm').reset();
+            closeUploadModal();
+            updateUploadUI();
+
+            alert(`Hambalyo! Buuggaaga "${title}" waa la soo dhigay maktabadda.`);
+        }
+
+        function openUploadModal() {
+            updateUploadUI();
+            document.getElementById('uploadModal').style.display = 'block';
+        }
+        function closeUploadModal() { document.getElementById('uploadModal').style.display = 'none'; }
+
+        /* --- E-COMMERCE CART SYSTEM --- */
+        let cart = [];
+
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            updateCartUI();
+            alert(`Kartada waa ku dartay: ${title}`);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').innerText = cart.length;
+            let cartItemsList = document.getElementById('cartItemsList');
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = `<p style="color: var(--text-muted);">Kartadu waa madhan tahay iminka.</p>`;
+            } else {
+                cartItemsList.innerHTML = '';
+                cart.forEach((item, index) => {
+                    totalPrice += item.price;
+                    cartItemsList.innerHTML += `
+                        <div class="cart-item">
+                            <div>
+                                <strong style="color: #fff; font-size: 0.9rem;">${item.title}</strong>
+                                <div style="color: #22c55e; font-size: 0.85rem;">$${item.price.toFixed(2)}</div>
+                            </div>
+                            <button onclick="removeFromCart(${index})" style="background:none; border:none; color: #ef4444; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('cartTotalPrice').innerText = `$${totalPrice.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function openCartModal() { document.getElementById('cartModal').style.display = 'block'; }
+        function closeCartModal() { document.getElementById('cartModal').style.display = 'none'; }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("Kartadaadu waa madhan tahay!");
+                return;
+            }
+
+            let itemsText = cart.map((item, i) => `${i+1}. ${item.title} ($${item.price.toFixed(2)})`).join('%0A');
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+            let msg = `Asc%20Mohamed%20Store,%20waxaan%20doonayaa%20inaa%20iibsado%20buugaagtan:%0A%0A${itemsText}%0A%0A*Wadarta%20Guud:*%20$${total.toFixed(2)}%0A%0A*(Xusuusin: Waxaan xaq u leeyahay damaanad lacag celin ah ama buug beddel ah)*`;
+            
+            window.open(`https://wa.me/252639186244?text=${msg}`, '_blank');
+        }
+
+        function sendComment(event) {
+            event.preventDefault();
+            let name = document.getElementById('commentName').value;
+            let msg = document.getElementById('commentMessage').value;
+            let whatsappUrl = `https://wa.me/252639186244?text=Asc%20Mohamed,%20waxaa%20comment%20soo%20reabay:%20*${encodeURIComponent(name)}*%0A%0A*Fariinta:*%20${encodeURIComponent(msg)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function toggleFavorite(btn) {
+            let card = btn.closest('.book-card');
+            let icon = btn.querySelector('i');
+            if (card.getAttribute('data-fav') === 'true') {
+                card.setAttribute('data-fav', 'false');
+                btn.classList.remove('active');
+                icon.classList.replace('fa-solid', 'fa-regular');
+            } else {
+                card.setAttribute('data-fav', 'true');
+                btn.classList.add('active');
+                icon.classList.replace('fa-regular', 'fa-solid');
+            }
+        }
+
+        function filterBooks() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.book-card');
+            cards.forEach(card => {
+                let title = card.querySelector('.book-title').innerText.toLowerCase();
+                let desc = card.querySelector('.book-desc').innerText.toLowerCase();
+                if (title.includes(input) || desc.includes(input)) card.style.display = "flex";
+                else card.style.display = "none";
+            });
+        }
+
+        function filterCategory(cat, btn) {
+            let cards = document.querySelectorAll('.book-card');
+            let chips = document.querySelectorAll('.chip');
+            chips.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('categoryTitle').innerText = btn.innerText + " - Buugaagta";
+
+            cards.forEach(card => {
+                if (cat === 'all') card.style.display = "flex";
+                else if (cat === 'fav') {
+                    if (card.getAttribute('data-fav') === 'true') card.style.display = "flex";
+                    else card.style.display = "none";
+                } else if (card.getAttribute('data-category') === cat) card.style.display = "flex";
+                else card.style.display = "none";
+            });
+        }
+
+        updateUploadUI();
+    </script>
+</body>
+</html>
